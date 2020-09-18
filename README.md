@@ -45,7 +45,7 @@ mvn spring-boot:run -DMATCH_TIME_IN_MINUTES=10 -DPLAYER_1_NAME="John Doe" -DPLAY
 ## API Details
 A simple API explanation with an endpoints overview.
 * PingPong.java - Ping Pong game API. It simulated a Ping Pong match.
-** /ping - It responds "pong", represents a play.
-** /pong - It responds "ping", represents a play.
-** /match - Give match information, use external configuration (env-vars).
-** /referee - The referee whistle the bell. Game stops.
+	* /ping - It responds "pong", represents a play.
+	* /pong - It responds "ping", represents a play.
+	* /match - Give match information, use external configuration (env-vars).
+	* /referee - The referee whistle the bell. Game stops.
