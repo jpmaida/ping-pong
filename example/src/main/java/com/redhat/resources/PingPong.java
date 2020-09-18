@@ -17,7 +17,7 @@ public class PingPong {
     @RequestMapping("/ping")
     @ResponseBody
     public String ping() {
-        return "super pong";
+        return "pong";
     }
 
     @RequestMapping("/pong")
