@@ -43,6 +43,9 @@ mvn spring-boot:run -DMATCH_TIME_IN_MINUTES=10 -DPLAYER_1_NAME="John Doe" -DPLAY
 ```
 
 ### Environment Variables
+* MATCH_TIME_IN_MINUTES ~> How many time, in minutes, one match takes.
+* PLAYER_1_NAME ~> Player 1 name
+* PLAYER_2_NAME ~> Player 2 name
 
 ## API Details
 A simple API explanation with an endpoints overview.
