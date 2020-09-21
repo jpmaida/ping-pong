@@ -32,6 +32,7 @@ example/
 ```
 
 ## Build and Run
+### Build
 To build and install or build and package use the following commands:
 ```
 mvn clean install -DskipTests
@@ -41,10 +42,12 @@ or
 mvn clean package -DskipTests
 ```
 The generated JAR will be place inside the `target` folder.
-In order to run the application, use:
+### Run
+In order to run the application locally, use:
 ```
 mvn spring-boot:run -DMATCH_TIME_IN_MINUTES=10 -DPLAYER_1_NAME="John Doe" -DPLAYER_2_NAME="Mary Ann"
 ```
+If Openshift is your thing see the `oc-commands.md` file inside the `ocp` directory.
 
 ### Environment Variables
 * MATCH_TIME_IN_MINUTES ~> How many time, in minutes, one match takes.
