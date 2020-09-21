@@ -2,11 +2,11 @@ package com.redhat.resources;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @EnableAutoConfiguration
 public class PingPong {
 
@@ -15,19 +15,16 @@ public class PingPong {
     @Value("${PLAYER_2_NAME}") private String player2Name;
 
     @RequestMapping("/ping")
-    @ResponseBody
     public String ping() {
         return "pong";
     }
 
     @RequestMapping("/pong")
-    @ResponseBody
     public String pong() {
         return "ping";
     }
 
     @RequestMapping("/match")
-    @ResponseBody
     public String matchConfigurations() {
         String matchData = "This match will last " + this.matchTimeInMinutes + " minutes.<br/>"
                             + "Player 1 name: " + this.player1Name + "<br/>"
@@ -36,7 +33,6 @@ public class PingPong {
     }
 
     @RequestMapping("/referee")
-    @ResponseBody
     public String ringTheBell() {
         return "Piiiiiiiiiiii";
     }
