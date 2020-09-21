@@ -1,6 +1,10 @@
 # hello-world-spring-boot
 Spring Boot Hello World repository. This project can be used to presentations, hand-ons or just for studing purposes. Have fun :D
 
+## Repo's structure
+```
+
+```
 
 ## Project's structure
 Web Maven project with Spring Boot engine and API
