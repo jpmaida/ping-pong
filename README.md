@@ -42,6 +42,8 @@ In order to run the application, use:
 mvn spring-boot:run -DMATCH_TIME_IN_MINUTES=10 -DPLAYER_1_NAME="John Doe" -DPLAYER_2_NAME="Mary Ann"
 ```
 
+### Environment Variables
+
 ## API Details
 A simple API explanation with an endpoints overview.
 * PingPong.java - Ping Pong game API. It simulated a Ping Pong match.
