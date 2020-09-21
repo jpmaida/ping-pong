@@ -3,7 +3,13 @@ Spring Boot Hello World repository. This project can be used to presentations, h
 
 ## Repo's structure
 ```
-
+hello-world-spring-boot
+├── README.md
+├── example ~> Maven project
+├── ocp
+│   ├── configmap.yaml
+│   └── oc-commands.md
+└── useful-commands.md
 ```
 
 ## Project's structure
