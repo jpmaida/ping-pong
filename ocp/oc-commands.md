@@ -15,3 +15,11 @@ oc start-build bc/hello-world-spring-boot --wait --follow --from-file=<path_to_y
 ## Creating a new app
 oc new-app --name=hello-world-spring-boot --image-stream=hello-world-spring-boot:latest -n myproject
 
+## Creating ConfigMap
+oc create -f ocp/configmap.yaml -n myproject
+
+## Inject ConfigMap content as env-vars in deployment
+oc set env deployment/hello-world-spring-boot --from configmap/ping-pong-config -n myproject
+
+## Inject env-var into deployment
+oc set env deployment/hello-world-spring-boot MATCH_TIME_IN_MINUTES=10 -n myproject
