@@ -4,7 +4,7 @@
 oc new-project myproject --display-name="My Display Name" --description="My description"
 
 ## Importing an image from Red Hat registry
-oc import-image redhat-openjdk-18/openjdk18-openshift --from=registry.redhat.io/redhat-openjdk-18/openjdk18-openshift --confirm -n myproject
+oc import-image redhat-openjdk-18/openjdk18-openshift --from=registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.8 --confirm -n myproject
 
 ## Creating a new build
 oc new-build --name=hello-world-spring-boot --image-stream=openjdk18-openshift:latest --binary -n myproject
