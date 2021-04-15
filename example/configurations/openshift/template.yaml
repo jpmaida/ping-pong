@@ -1,0 +1,100 @@
+---
+kind: Template
+apiVersion: v1
+metadata:
+  name: springboot-api
+  annotations:
+    description: Application template from a springboot API
+objects:
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: "${APPLICATION_NAME}"
+    labels:
+      app: "${APPLICATION_NAME}"
+    annotations:
+      description: Defines how to deploy the application server
+  spec:
+    strategy:
+      type: Rolling
+      rollingParams:
+        updatePeriodSeconds: 1
+        intervalSeconds: 1
+        timeoutSeconds: 600
+        maxUnavailable: 25%
+        maxSurge: 25%
+      resources: {}
+    triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - "${APPLICATION_NAME}"
+        from:
+          kind: ImageStreamTag
+          name: "${APPLICATION_NAME}:latest"
+    replicas: 1
+    selector:
+      deploymentconfig: "${APPLICATION_NAME}"
+    template:
+      metadata:
+        creationTimestamp: 
+        labels:
+          deploymentconfig: "${APPLICATION_NAME}"
+      spec:
+        containers:
+        - name: "${APPLICATION_NAME}"
+          image: "${APPLICATION_NAME}"
+          envFrom:
+            configMapRef: ping-pong-config
+          livenessProbe:
+            httpGet:
+              path: "${LIVENESS_PROBE}"
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 180
+          readinessProbe:
+            httpGet:
+              path: "${READINESS_PROBE}"
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          terminationMessagePath: "/dev/termination-log"
+          imagePullPolicy: Always
+        restartPolicy: Always
+        terminationGracePeriodSeconds: 30
+        dnsPolicy: ClusterFirst
+        securityContext: {}
+- kind: Route
+  apiVersion: v1
+  metadata:
+    name: "${APPLICATION_NAME}"
+  spec:
+    host: "${APPLICATION_HOSTNAME}"
+    to:
+      kind: Service
+      name: "${APPLICATION_NAME}"
+parameters:
+- name: APPLICATION_NAME
+  description: Application Name
+  value: springboot-newrelic-app
+  displayName: Application Name
+  required: true
+- name: APPLICATION_HOSTNAME
+  description: The exposed hostname that will route to the app service, if left blank
+    a value will be defaulted.
+  displayName: Application hostname
+- name: LIVENESS_PROBE
+  description: Liviness probe path
+  value: /match
+  displayName: Liveness probe
+- name: READINESS_PROBE
+  description: Readiness probe path
+  value: /match
+  displayName: Readiness probe
+labels:
+  template: springboot-api
