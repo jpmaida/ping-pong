@@ -2,6 +2,7 @@ apiVersion: v1
 data:
   PLAYER_1_NAME: John Doe
   PLAYER_2_NAME: Mary Ann
+  MATCH_TIME_IN_MINUTES: 5
 kind: ConfigMap
 metadata:
   name: ping-pong-config
