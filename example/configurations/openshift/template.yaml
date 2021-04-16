@@ -3,6 +3,9 @@ kind: Template
 apiVersion: v1
 metadata:
   name: springboot-api
+  labels:
+    template: springboot-api
+    app: "${APPLICATION_NAME}"
   annotations:
     description: Application template from a springboot API
 objects:
@@ -10,8 +13,6 @@ objects:
   apiVersion: v1
   metadata:
     name: "${APPLICATION_NAME}"
-    labels:
-      app: "${APPLICATION_NAME}"
     annotations:
       description: Defines how to deploy the application server
   spec:
@@ -75,8 +76,6 @@ objects:
   apiVersion: v1
   metadata:
     name: "${APPLICATION_NAME}"
-    labels:
-      app: "${APPLICATION_NAME}"
   spec:
     selector:
       app: "${APPLICATION_NAME}"
@@ -89,8 +88,6 @@ objects:
   apiVersion: v1
   metadata:
     name: "${APPLICATION_NAME}"
-    labels:
-      app: "${APPLICATION_NAME}"
   spec:
     host: "${APPLICATION_HOSTNAME}"
     to:
@@ -114,5 +111,3 @@ parameters:
   description: Readiness probe path
   value: /match
   displayName: Readiness probe
-labels:
-  template: springboot-api
