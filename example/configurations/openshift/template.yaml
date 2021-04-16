@@ -47,7 +47,8 @@ objects:
         - name: "${APPLICATION_NAME}"
           image: "${APPLICATION_NAME}"
           envFrom:
-            configMapRef: ping-pong-config
+            configMapRef:
+              name: ping-pong-config
           livenessProbe:
             httpGet:
               path: "${LIVENESS_PROBE}"
@@ -97,4 +98,5 @@ parameters:
   value: /match
   displayName: Readiness probe
 labels:
-  template: springboot-api
+- template=springboot-api
+  "app=${APPLICATION_NAME}"
