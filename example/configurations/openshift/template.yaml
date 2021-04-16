@@ -5,6 +5,8 @@ metadata:
   name: springboot-api
   annotations:
     description: Application template from a springboot API
+  labels:
+    app: "${APPLICATION_NAME}"
 objects:
 - kind: DeploymentConfig
   apiVersion: v1
@@ -98,5 +100,4 @@ parameters:
   value: /match
   displayName: Readiness probe
 labels:
-- template=springboot-api
-  "app=${APPLICATION_NAME}"
+  template: springboot-api
