@@ -47,7 +47,7 @@ objects:
         - name: "${APPLICATION_NAME}"
           image: "${APPLICATION_NAME}"
           envFrom:
-            configMapRef:
+          - configMapRef:
               name: ping-pong-config
           livenessProbe:
             httpGet:
