@@ -35,7 +35,7 @@ objects:
         - "${APPLICATION_NAME}"
         from:
           kind: ImageStreamTag
-          name: "${APPLICATION_NAME}:latest"
+          name: "${APPLICATION_NAME}:${APPLICATION_VERSION}"
     replicas: 1
     selector:
       deploymentconfig: "${APPLICATION_NAME}"
@@ -104,6 +104,10 @@ parameters:
   value: springboot-newrelic-app
   displayName: Application Name
   required: true
+- name: APPLICATION_VERSION
+  description: Application Version
+  value: latest
+  displayName: Application Version
 - name: APPLICATION_HOSTNAME
   description: The exposed hostname that will route to the app service, if left blank
     a value will be defaulted.
