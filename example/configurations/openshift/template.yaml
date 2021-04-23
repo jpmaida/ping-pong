@@ -59,17 +59,17 @@ objects:
           livenessProbe:
             httpGet:
               path: "${LIVENESS_PROBE}"
-              port: 8080
+              port: "${APPLICATION_PORT}"
               scheme: HTTP
             initialDelaySeconds: 180
           readinessProbe:
             httpGet:
               path: "${READINESS_PROBE}"
-              port: 8080
+              port: "${APPLICATION_PORT}"
               scheme: HTTP
             initialDelaySeconds: 30
           ports:
-          - containerPort: 8080
+          - containerPort: "${APPLICATION_PORT}"
             protocol: TCP
           terminationMessagePath: "/dev/termination-log"
           imagePullPolicy: Always
@@ -89,8 +89,8 @@ objects:
     ports:
       - protocol: TCP
         name: web
-        port: 8080
-        targetPort: 8080
+        port: "${APPLICATION_PORT}"
+        targetPort: "${APPLICATION_PORT}"
 - kind: Route
   apiVersion: v1
   metadata:
