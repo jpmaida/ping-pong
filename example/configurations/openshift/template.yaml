@@ -51,7 +51,11 @@ objects:
           image: "${APPLICATION_NAME}"
           envFrom:
           - configMapRef:
-              name: ping-pong-config
+              name: "${APPLICATION_CONFIG_MAP}"
+              optional: true
+          - secretRef:
+              name: "${APPLICATION_SECRET}"
+              optional: true
           livenessProbe:
             httpGet:
               path: "${LIVENESS_PROBE}"
@@ -104,6 +108,16 @@ parameters:
   value: springboot-newrelic-app
   displayName: Application Name
   required: true
+- name: APPLICATION_PORT
+  description: Application Port
+  value: "8080"
+  displayName: Application Port
+- name: APPLICATION_CONFIG_MAP
+  description: Application Configmap name
+  displayName: Application Configmap
+- name: APPLICATION_SECRET
+  description: Application Secret
+  displayName: Application Secret
 - name: APPLICATION_VERSION
   description: Application Version
   value: latest
