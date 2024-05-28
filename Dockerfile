@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/ubi8/openjdk-8:latest AS build
 
-COPY pom.xml .
-COPY src .
+COPY pom.xml pom.xml
+COPY src src
 
 RUN mvn clean package -DskipTests
 
