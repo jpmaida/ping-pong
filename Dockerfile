@@ -1,4 +1,11 @@
-FROM registry.access.redhat.com/ubi8/openjdk-8:latest
+FROM registry.access.redhat.com/ubi8/openjdk-8:latest AS build
+
+COPY pom.xml .
+COPY src .
+
+RUN mvn clean -DskipTests
+
+FROM registry.access.redhat.com/ubi8/openjdk-8:latest AS run
 ADD target/ping-pong.jar ping-pong.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "ping-pong.jar"]
