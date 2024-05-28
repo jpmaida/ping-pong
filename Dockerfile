@@ -11,7 +11,6 @@ RUN mvn clean package -DskipTests && ls -la target/
 FROM registry.access.redhat.com/ubi8/openjdk-8:latest AS run
 
 WORKDIR /home/jboss
-RUN ls -la && pwd
 COPY --from=build /home/jboss/target/ping-pong.jar ping-pong.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "ping-pong.jar"]
