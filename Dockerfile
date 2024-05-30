@@ -6,7 +6,7 @@ COPY pom.xml pom.xml
 COPY src src
 RUN chown -R jboss:jboss pom.xml src/
 USER jboss
-RUN mvn clean package -DskipTests && ls -la target/
+RUN mvn clean package -DskipTests
 
 FROM registry.access.redhat.com/ubi8/openjdk-8:latest AS run
 
