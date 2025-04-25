@@ -1,74 +1,66 @@
-# hello-world-spring-boot
-Spring Boot Hello World repository. This project can be used to presentations, hand-ons or just for studing purposes. Have fun :D
+# ping-pong-quarkus
 
-## Repo's structure
-```
-hello-world-spring-boot
-├── README.md ~> ReadMe file
-├── example ~> Maven project
-├── ocp ~> Configuration files to deloy the application on Openshift
-│   ├── configmap.yaml
-│   └── oc-commands.md
-└── useful-commands.md ~> Some useful commands
-```
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-## Project's structure
-Web Maven project with Spring Boot engine and API
-```
-example/
-├── pom.xml
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com
-│   │   │       └── redhat
-│   │   │           └── resources
-│   │   │               ├── PingPong.java -> Ping Pong Game API
-│   │   │               └── SpringBootApplicationLauncher.java -> Spring Boot Activator
-│   │   ├── resources
-│   │   │   └── META-INF
-│   │   └── webapp
-│   │       ├── WEB-INF
-│   │       │   └── beans.xml
-│   │       └── resources
-│   └── test
-│       ├── java
-│       └── resources
-└── target
+If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+
+## Running the application in dev mode
+
+You can run your application in dev mode that enables live coding using:
+
+```shell script
+./mvnw quarkus:dev
 ```
 
-## Build and Run
-### Build
-To build and install or build and package use the following commands:
-```
-mvn clean install -DskipTests
-```
-or
-```
-mvn clean package -DskipTests
-```
-The generated JAR will be place inside the `target` folder.
-### Run
-In order to run the application locally, use:
-```
-mvn spring-boot:run -DMATCH_TIME_IN_MINUTES=10 -DPLAYER_1_NAME="John Doe" -DPLAYER_2_NAME="Mary Ann"
-```
-In case of using Docker, use the following commands:
-```
-docker build -f example/Dockerfile -t ping-pong:latest .
-docker run -p 8080:8080 -e MATCH_TIME_IN_MINUTES=<your-time> -e PLAYER_1_NAME="<name-player-1>" -e PLAYER_2_NAME="<name-player-2>" ping-pong:latest
-```
-If Openshift is your thing see the `oc-commands.md` file inside the `ocp` directory.
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
 
-### Environment Variables
-* MATCH_TIME_IN_MINUTES ~> How many time, in minutes, one match takes.
-* PLAYER_1_NAME ~> Player 1 name
-* PLAYER_2_NAME ~> Player 2 name
+## Packaging and running the application
 
-## API Details
-A simple API explanation with an endpoints overview.
-* PingPong.java - Ping Pong game API. It simulated a Ping Pong match.
-	* /ping - It responds "pong", represents a play.
-	* /pong - It responds "ping", represents a play.
-	* /match - Give match information, it uses external configuration (env-vars).
-	* /referee - The referee whistle the bell, game stops.
+The application can be packaged using:
+
+```shell script
+./mvnw package
+```
+
+It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+
+The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+
+If you want to build an _über-jar_, execute the following command:
+
+```shell script
+./mvnw package -Dquarkus.package.jar.type=uber-jar
+```
+
+The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+
+## Creating a native executable
+
+You can create a native executable using:
+
+```shell script
+./mvnw package -Dnative
+```
+
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+
+```shell script
+./mvnw package -Dnative -Dquarkus.native.container-build=true
+```
+
+You can then execute your native executable with: `./target/ping-pong-quarkus-1.0.0-SNAPSHOT-runner`
+
+If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+
+## Related Guides
+
+- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
+
+## Provided Code
+
+### REST
+
+Easily start your REST Web Services
+
+[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
