@@ -55,7 +55,7 @@ mvn spring-boot:run -DMATCH_TIME_IN_MINUTES=10 -DPLAYER_1_NAME="John Doe" -DPLAY
 ```
 In case of using Docker, use the following commands:
 ```
-docker build -f example/Dockerfile -t ping-pong:latest .
+docker build -f Dockerfile -t ping-pong:latest .
 docker run -p 8080:8080 -e MATCH_TIME_IN_MINUTES=<your-time> -e PLAYER_1_NAME="<name-player-1>" -e PLAYER_2_NAME="<name-player-2>" ping-pong:latest
 ```
 If Openshift is your thing see the `oc-commands.md` file inside the `ocp` directory.
