@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: ping-pong
+  labels:
+    app: ping-pong
+    app.kubernetes.io/component: ping-pong
+    app.kubernetes.io/instance: ping-pong
+    app.kubernetes.io/name: ping-pong
+spec:
+  to:
+    kind: Service
+    name: ping-pong
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  wildcardPolicy: None

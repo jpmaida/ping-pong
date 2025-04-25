@@ -1,0 +1,44 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ping-pong
+  labels:
+    app: ping-pong
+    app.kubernetes.io/component: ping-pong
+    app.kubernetes.io/instance: ping-pong
+    app.kubernetes.io/name: ping-pong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: ping-pong
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        deployment: ping-pong
+    spec:
+      containers:
+        - name: ping-pong
+          image: 'image-registry.openshift-image-registry.svc:5000/devconverge/ping-pong:latest'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
