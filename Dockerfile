@@ -11,6 +11,6 @@ RUN mvn clean package -DskipTests
 FROM registry.access.redhat.com/ubi8/openjdk-17:1.21-1.1744797574 AS run
 
 WORKDIR /home/jboss
-COPY --from=build /home/jboss/target/ping-pong.jar ping-pong.jar
+COPY --from=build /home/jboss/target/quarkus-app quarkus-app
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "ping-pong.jar"]
+ENTRYPOINT ["java", "-jar", "quarkus-app/quarkus-run.jar"]

@@ -31,7 +31,7 @@ public class PingPong {
     }
 
     @Path("/match")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_HTML)
     @GET
     public String matchConfigurations() {
         String matchData = "This match will last " + this.matchTimeInMinutes + " minutes.<br/>"
