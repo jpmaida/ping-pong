@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: 'image-registry.openshift-image-registry.svc:5000/devconverge/ping-pong:26042025'
+          image: 'image-registry.openshift-image-registry.svc:5000/devconverge/ping-pong:666'
           ports:
             - containerPort: 8080
               protocol: TCP
