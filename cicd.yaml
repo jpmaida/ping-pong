@@ -1,0 +1,13 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run tests
+        run: |
+          echo "Running tests..."
